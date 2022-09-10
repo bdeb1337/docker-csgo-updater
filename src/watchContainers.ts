@@ -34,13 +34,13 @@ async function watchContainer(containerInfo: Docker.ContainerInfo) {
             updating = true
 
             logger.info(
-              `Update available for ${containerName} (${container.id}), restarting with SIGINT ...`
+              `Update available for ${containerName} (${container.id}), restarting with SIGKILL ...`
             )
 
             stdoutStream.removeListener('data', checkForUpdate)
 
             await Promise.all([
-              container.kill({ signal: 'SIGINT' }),
+              container.kill({ signal: 'SIGKILL' }),
               container.wait()
             ])
 
